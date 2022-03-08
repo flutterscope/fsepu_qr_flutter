@@ -18,10 +18,23 @@ class _StaticQRPageState extends State<StaticQRPage> {
         title: const Text('Static QR Code'),
       ),
       body: Center(
-        child: QrImage(
-          data: qrData,
-          version: QrVersions.auto,
-          size: 200.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              qrData,
+              style:
+                  const TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+            QrImage(
+              data: qrData,
+              version: QrVersions.auto,
+              size: 200.0,
+            ),
+          ],
         ),
       ),
     );
