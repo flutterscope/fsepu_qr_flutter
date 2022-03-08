@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fsepu_qr_flutter/static_qr_page.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+
+import 'dynamic_qr_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,18 +12,43 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  void goToStaticQRPage() async {
+    await Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => const StaticQRPage(),
+      ),
+      (route) => true,
+    );
+  }
 
-  String qrData = "FlutterScope QR Code";
+  void goToDynamicQRPagePage() async {
+    await Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => const DynamicQRPage(),
+      ),
+      (route) => true,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('qr_flutter'),),
+      appBar: AppBar(
+        title: const Text('qr_flutter'),
+      ),
       body: Center(
-        child: QrImage(
-          data: qrData,
-          version: QrVersions.auto,
-          size: 200.0,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: goToStaticQRPage,
+                child: const Text("Static QR Code")),
+            ElevatedButton(
+                onPressed: goToDynamicQRPagePage,
+                child: const Text("Dynamic QR Code")),
+          ],
         ),
       ),
     );
